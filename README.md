@@ -5,4 +5,7 @@ ModernWeb072714
 * [Farata Systems](http://faratasystems.com/upcoming-training/)
 
 ######Technologies and software used:######
+* [Java SE 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [IntelliJ IDEA](http://www.jetbrains.com/idea/)
 * TODO
+
