@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auction Homepage</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">ABC Auction</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-left navbar-input-group" role="search" action="search-results.html">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter product name">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+                </li>
+                <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping
+                    cart</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- / Navbar -->
+
+<div class="container">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Search Results</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <h2 class="well">Search Results</h2>
+    </div>
+
+    <div class="row">
+        <!-- Search results list with thumbnails and description  -->
+        <ul class="list-unstyled" id="search-results">
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/01.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 1</a></h2>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim ad minim veniam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;3</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$123.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/02.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 2</a></h2>
+
+                        <p>
+                            Morbi mollis ante at ante posuere adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore tempor. Ut enim ad minim veniam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;3</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$43.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/03.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 3</a></h2>
+
+                        <p>
+                            Donec ac ligula sit amet libero adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore vehicula. Ut enim ad minim veniam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;12</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$49.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/04.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 4</a></h2>
+
+                        <p>
+                            Sed accumsan nibh sapien, interdum adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore ullamcorper velit. Ut enim ad minim veniam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;12</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$72.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/05.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 5</a></h2>
+
+                        <p>
+                            Pellentesque habitant morbi tristique adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore senectus. Ut enim ad minim veniam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;12</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$84.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+            <li class="col-md-6">
+                <div class="row top-buffer">
+                    <div class="col-xs-4">
+                        <a href="javascript:void(0)"><img src="assets/img/06.jpg" alt="" class="img-responsive"></a>
+                    </div>
+
+                    <div class="product-description-holder col-xs-8">
+                        <h2><a href="javascript:void(0)">Item 6</a></h2>
+
+                        <p>
+                            Ut enim ad minim veniam. Sed accumsan adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore nibh sapien. Morbi mollis ante at ante.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Today 15:00&nbsp;<span class="label label-default ">2 hours left</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Watchers&nbsp;<span class="label label-default glyphicon glyphicon-eye-open">&nbsp;12</span></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Price&nbsp;<span class="label label-default">$84.00</span></h5>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+        <!-- / Featured Products list with thumbnails and description  -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <br/>
+        <a href="javascript:void(0)">Home</a> |
+        <a href="javascript:void(0)">Search</a> |
+        <a href="javascript:void(0)">About Us</a> |
+        <a href="javascript:void(0)">Terms of Service</a>
+        <br/><br/>
+    </footer>
+    <!-- / Footer -->
+</div>
+
+<script src="assets/js/jquery-2.1.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>
