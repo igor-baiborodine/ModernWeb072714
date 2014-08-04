@@ -1,0 +1,139 @@
+= Walkthrough 3 Guide
+© 2014 Farata Systems LLC.
+:icons: font
+:last-update-label!:
+:node_href: http://nodejs.org/
+:npm_href: https://www.npmjs.org/
+:node_download_href: http://nodejs.org/download/
+:node_pkg_href: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+
+
+== Prerequisites
+
+Make sure you have {node_href}[node.js] and {npm_href}[npm] installed on your machine. To install them download an installer for you platform {node_download_href}[here] or alternatively follow OS-specific instructions {node_pkg_href}[here].
+
+Ensure both tools correctly installed and available on your `PATH` in the command-line. For node.js execute following command (you should be able to see version number):
+
+[source,shell]
+----
+$ node --version
+v0.10.26
+----
+
+Similar for npm:
+
+[source,shell]
+----
+$ npm --version
+1.4.4
+----
+
+If you are able to see version numbers and no error messages are printed, then everything is OK and you are ready to proceed with this guide.
+
+
+== Installing dependencies
+
+. Create new directory for the walkthrough, name it `w3`. Open the command-line, navigate to the `w3`.
+
+. Execute following command to install JavaScript task runner Grunt:
++
+[source,shell]
+----
+$ npm install -g grunt-cli
+----
+
+. Execute following command to install Bower package manager:
++
+[source,shell]
+----
+$ npm install -g bower
+----
+
+. Execute following commands to install Yeoman scaffolding tool and AngularJS app generator:
++
+[source,shell]
+----
+$ npm install -g yo
+$ npm install -g generator-angular
+----
+
+. Make sure, Bower, Grunt and Yeoman are correctly installed and available on you PATH:
++
+[source,shell]
+----
+$ grunt --version
+grunt-cli v0.1.13
+
+$ bower --version
+1.3.8
+
+$ yo --version
+1.2.1
+----
+
+. Generate new AngularJS app using Yeoman. Decline all the options during the installation process.
++
+[source,shell]
+----
+$ yo angular
+----
+
+
+. Install all the tools required to run Grunt tasks (make sure there are no errors in the output):
++
+[source,shell]
+----
+$ npm install
+----
+
+. Install all 3rd-party JavaScript packages required for development.
++
+[source,shell]
+----
+$ bower install
+----
+
+. Check everything is installed correctly. Execute following command:
++
+[source,shell]
+----
+$ grunt build
+----
++
+After Grunt finishes executing all the tasks, at the end of the output you should be able to see message similar to this.
++
+----
+Done, without errors.
+
+
+Execution Time (2014-03-04 10:55:05 UTC)
+clean:dist        132ms  ▇ 1%
+concurrent:dist    4.3s  ▇▇▇▇▇▇▇▇▇▇ 42%
+ngmin:dist         3.5s  ▇▇▇▇▇▇▇▇ 34%
+copy:dist         802ms  ▇▇ 8%
+uglify:generated   1.5s  ▇▇▇▇ 14%
+Total 10.3s
+----
++
+If so, everything is OK and you are ready to start developing the auction app.
+
+
+== Developing the auction app
+
+After you successfully generated the boilerplate for the project, you need to move controllers, services and views implemented in the previous walkthrough to the generated app.
+
+While working on the walkthrough you can use following workflow:
+
+. Start Grunt development server:
++
+----
+$ grunt serve
+----
++
+Grunt will launch your default browser and open the application in new tab. The development server will continue running in the background.
+
+. Modify code in the `app` folder towards completing the walkthrough. Whenever you change anything in the `w3/app` directory, development server notices the changes, re-run build tasks and automatically refreshes page with the app in the browser.
++
+NOTE: Automatic refresh works only if http://livereload.com/[LiveReload] plugin is installed for your borwser).
+
+. When you are done with the walkthrough use command `grunt build` to prepare production version of the app. `w3/app/dist` directory will be generated, use the content of this directory to test production version.
