@@ -14,15 +14,17 @@
 
     /** Returns the list of all available products on the server. */
     getProducts: function () {
-      return this.$http.get('data/products-featured.json')
-          .then(function (resp) { return resp.data; });
+        return this.$http.get('/data/products-featured.json')
+            .then(function (resp) {
+                return resp.data;
+            });
     },
 
     /** Finds products with specified criteria.
       * NOTE: Search criteria are not implemented yet.
       */
     find: function () {
-      return this.$http.get('data/products-search.json')
+      return this.$http.get('/data/products-search.json')
           .then(function (resp) { return resp.data; });
     }
   };

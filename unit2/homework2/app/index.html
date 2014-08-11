@@ -29,14 +29,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="javascript:void(0)" ng-click="currentView = 'home'">ABC Auction</a>
+                <a class="navbar-brand" ng-href="#/">Igor Baiborodine's Auction</a>
             </div>
             <div class="navbar-collapse collapse">
                 <form class="navbar-form navbar-left navbar-input-group" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter product name">
                     </div>
-                    <a href="javascript:void(0)" ng-click="currentView = 'search'" class="btn btn-default">Search</a>
+                    <a ng-href="#/search" class="btn btn-default">Search</a>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
@@ -49,7 +49,7 @@
     <!-- / Navbar -->
 
     <div class="container">
-        <div class="row" ng-init="currentView = 'home'" ng-include="'views/' + currentView + '.html'">
+        <div class="row" ng-view>
     </div>
 
     <!-- Footer -->
@@ -73,6 +73,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <!-- endbower -->
