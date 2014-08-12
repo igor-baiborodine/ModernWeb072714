@@ -21,31 +21,7 @@
     <![endif]-->
 
     <!-- Navbar -->
-    <div class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" ng-href="#/">ABC Auction</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <form class="navbar-form navbar-left navbar-input-group" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter product name">
-                    </div>
-                    <a ng-href="#/search" class="btn btn-default">Search</a>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
-                    <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                    <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping cart</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <auction-navbar></auction-navbar>
     <!-- / Navbar -->
 
     <div class="container">
@@ -53,12 +29,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center">
-        <a href="javascript:void(0)">Home</a> |
-        <a href="javascript:void(0)">Search</a> |
-        <a href="javascript:void(0)">About Us</a> |
-        <a href="javascript:void(0)">Terms of Service</a>
-    </footer>
+    <auction-footer></auction-footer>
     <!-- / Footer -->
 
 
@@ -84,6 +55,8 @@
         <script src="scripts/controller/HomeController.js"></script>
         <script src="scripts/controller/SearchController.js"></script>
         <script src="scripts/service/ProductService.js"></script>
+        <script src="scripts/directive/NavbarDirective.js"></script>
+        <script src="scripts/directive/FooterDirective.js"></script>
         <!-- endbuild -->
 </body>
 </html>
