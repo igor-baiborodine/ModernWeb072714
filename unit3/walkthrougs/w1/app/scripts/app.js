@@ -1,28 +1,42 @@
 (function () {
-  'use strict';
+    'use strict';
 
-  angular.module('auction', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
-      // STEP 2A
+    var auctionModule = angular.module('auction', ['ngRoute'])
+        .config(['$routeProvider', function ($routeProvider) {
 
-      $routeProvider
-        .when('/', {
-          templateUrl: 'views/home.html',
-          controller: 'HomeController',
-          controllerAs: 'ctrl'
-          // STEP 2B
-        })
-        .when('/search', {
-          templateUrl: 'views/search.html',
-          controller: 'SearchController',
-          controllerAs: 'ctrl'
-          // STEP 2B
-        })
-        .otherwise({
-           redirectTo: '/'
+        var title = function (page) {
+          return 'Auction | ' + page;
+        };
+
+        $routeProvider
+            .when('/', {
+                templateUrl: 'views/home.html',
+                controller: 'HomeController',
+                controllerAs: 'ctrl',
+                title: title('Home')
+            })
+            .when('/search', {
+                templateUrl: 'views/search.html',
+                controller: 'SearchController',
+                controllerAs: 'ctrl',
+                title: title('Search')
+            })
+            .otherwise({
+               redirectTo: '/'
         });
     }]);
-    // STEP 2C
-    // STEP 2D
-    // STEP 2E
+
+    auctionModule.run(['$rootScope', function ($rootScope) {
+            $rootScope.$on('$routeChangeStart', function (event, next, current) {
+                $rootScope.pageTitle = next.$$route.title;
+            });
+        }]);
+    /*
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.$on('$routeChangeStart', function (event, next) {
+            $rootScope.pageTitle = next.$$route.title;
+        });
+    }]);
+    */
+
 }());
