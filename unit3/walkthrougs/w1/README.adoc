@@ -1,0 +1,86 @@
+= Unit 3. Walkthrough 1.
+© 2014 Farata Systems LLC. <training@faratasystems.com>
+
+:icons: font
+:last-update-label!:
+:sectanchors:
+:idprefix:
+:numbered!:
+:source-highlighter: highlightjs
+
+
+== Summary
+
+In this walkthrough you will implement a feature to update page title every time user navigates to a different page (i.e. routing event is successfully completed).
+
+== Steps
+
+. Use `walkthroughs/w1` directory from the provided handouts as the starting point for the walkthrough.
+
+. Open `app/scripts/app.js` file.
+[style="upperalpha"]
+.. At the top of `config()` method's body add a function that will generate a title string. The function should accept a parameter which is a current page's title, and it will return string with application name appended to the of the original string:
++
+[source,js]
+----
+var title = function (page) {
+  return page + ' | Auction';
+};
+----
+
+.. For each `when()` method add a custom property `title` for the second parameter (route configuration object). Give a name for each page, use previously defined `title()` method. Example:
++
+[source,js]
+----
+$routeProvider
+  .when('/', {
+    templateUrl: 'views/home.html',
+    controller: 'HomeController',
+    controllerAs: 'ctrl',
+    title: title('Home') <1>
+  });
+----
+<1> Note how we invoke `title()` method defined on a previous step. It allows us to avoid code duplication and repetition of application name.
+
+.. Invoke `run()` method on the main application module and provide a callback function that accepts a single argument - `$rootScope` service:
++
+[source,js]
+----
+angular.module('auction', ['ngRoute'])
+  .run(['$rootScope', function ($rootScope) {
+  }]);
+----
+
+.. Inside the callback function subscribe to the `$routeChangeStart` event using `$on` method available on the `$rootScope`:
++
+[source,js]
+----
+angular.module('auction', ['ngRoute'])
+  .run(['$rootScope', function ($rootScope) {
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    });
+  }]);
+----
+
+.. Inside the event's handler initialize `$rootScope.pageTitle` property using `next.$$route.title` value:
++
+[source,js]
+----
+angular.module('auction', ['ngRoute'])
+  .run(['$rootScope', function ($rootScope) {
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      $rootScope.pageTitle = next.$$route.title; <1>
+    });
+  }]);
+----
+<1> Notice how we use `next` route, not `current`. It's because the event is fired before navigation is happened.
+
+. Open `app/index.html` file.
+[style="upperalpha"]
+.. For the `<title>` tag inside `<head>` add `ng-bind` directive and bind it to the `pageTitle` property that we created on the previous step:
++
+[source,html]
+----
+<title ng-bind="pageTitle">Auction</title> <1>
+----
+<1> Notice how we use `ng-bind` instead of `{{ pageTitle }}` expression. This way we avoid displaying literal binding expression before AngularJS is bootstrapped and data-binding expressions are resolved. We also provide a default value - `Auction`.

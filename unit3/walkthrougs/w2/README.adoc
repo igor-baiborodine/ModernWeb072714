@@ -1,0 +1,108 @@
+= Unit 3. Walkthrough 2.
+© 2014 Farata Systems LLC. <training@faratasystems.com>
+
+:icons: font
+:last-update-label!:
+:sectanchors:
+:idprefix:
+:numbered!:
+:source-highlighter: highlightjs
+
+
+== Summary
+
+In this walkthrough you will use AngularJS directive to decompose UI. In particular you will create directives for navigation bar and footer elements.
+
+
+== Steps
+
+. Use `walkthroughs/w2` directory from the provided handouts as the starting point for the walkthrough.
+
+. Create `app/scripts/directive/` directory that we will use for all our custom AngularJS directives.
+
+. Create `NavbarDirective.js` file inside `directive/` directory, and open just created file.
+[style="upperalpha"]
+.. Define self-executable anonymous function:
++
+[source,js]
+----
+(function () {
+
+}());
+----
+
+.. Inside the function declare `use strict` directive:
++
+[source,js]
+----
+(function () {
+  'use strict';
+}());
+----
+
+.. Right after `'use strict';` declare a factory function that we will use to create the dircetive. Name it `navbarDirectiveFactory`:
++
+[source,js]
+----
+var navbarDirectiveFactory = function () {};
+----
+
+.. Return a JavaScript object literal from `navbarDirectiveFactory` function with following properties initialized: `scope`, `restrict` and `templateUrl`:
++
+[source,js]
+----
+var navbarDirectiveFactory = function () {
+  return {
+    scope: false, <1>
+    restrict: 'E', <2>
+    templateUrl: 'views/partial/NavbarDirective.html' <3>
+  };
+};
+----
+<1> Do not create a new scope, reuse parent scope. In our case it's the root scope.
+<2> Allow to use directive only as custom HTML element.
+<3> Path to the HTML file that will contain navigation bar markup.
+
+.. Register the directive inside AngularJS DI container invoking `directive()` method available on the application nodule:
++
+[source,js]
+----
+angular.module('auction').directive(
+  'auctionNavbar', <1>
+  navbarDirectiveFactory); <2>
+----
+<1> Notice the name has required an application-specific prefix. It will be automatically translated by AngularJS into custom HTML element `<auction-navbar>`.
+<2> `directive()` method expects to get a _factory method_. This means the provided function will be normally invoked and the returned value will be registered within DI as singleton object.
+
+. Create `app/views/partial/` directory that we will use for directive templates.
+
+. Create `NavbarDirective.html` file inside `partial/` directory.
+
+. Copy HTML markup from `app/index.html` located between `<!-- Navbar -->` comments into `NavbarDirective.html` file.
+
+. Open `app/index.html` file.
+[style="upperalpha"]
+.. Replace content between `<!-- Navbar -->` comments with navigation bar directive:
++
+[source,html]
+----
+<!-- Navbar -->
+<abeola-navbar></abeola-navbar>
+<!-- / Navbar -->
+----
+
+.. Scroll at the bottom of the file. Add `<script>` tag for the directive JavaScript file:
++
+[source,html]
+----
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controller/HomeController.js"></script>
+<script src="scripts/controller/SearchController.js"></script>
+<script src="scripts/directive/NavbarDirective.js"></script> <1>
+<script src="scripts/service/ProductService.js"></script>
+<!-- endbuild -->
+----
+<1> This line should be added.
+
+. Repeat steps 3-7 but for footer directive.
