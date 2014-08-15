@@ -1,11 +1,8 @@
 (function () {
     'use strict';
 
-    var productService = function Product() {};
-
     angular.module('auction', ['ngRoute'])
         .config(['$routeProvider', function ($routeProvider) {
-
         var title = function (page) {
             return page + ' | Auction';
         };
@@ -25,7 +22,7 @@
             })
             .when('/product/:productId', {
                 templateUrl: 'views/product.html',
-                controller: 'ProductDetailsController',
+                controller: 'ProductController',
                 controllerAs: 'ctrl',
                 title: title('Product Details'),
                 resolve: {
