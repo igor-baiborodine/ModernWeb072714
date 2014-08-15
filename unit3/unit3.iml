@@ -8,12 +8,18 @@
       <excludeFolder url="file://$MODULE_DIR$/homework-solution/app/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/homework-solution/dist" />
       <excludeFolder url="file://$MODULE_DIR$/homework-solution/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/homework3/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/homework3/bower_components" />
+      <excludeFolder url="file://$MODULE_DIR$/homework3/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/homework3/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w1/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w1/app/bower_components" />
+      <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w1/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w1/dist" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w1/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w2/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w2/app/bower_components" />
+      <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w2/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w2/dist" />
       <excludeFolder url="file://$MODULE_DIR$/walkthrougs/w2/node_modules" />
     </content>
