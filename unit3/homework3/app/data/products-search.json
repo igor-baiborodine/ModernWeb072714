@@ -1,0 +1,62 @@
+[
+  {
+    "id"          : 7,
+    "title"       : "Unit 1",
+    "thumb"       : "01-1.jpg",
+    "thumb_small" : "01-1_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 12,
+    "price"       : 123
+  },
+  {
+    "id"          : 8,
+    "title"       : "Unit 2",
+    "thumb"       : "01-2.jpg",
+    "thumb_small" : "01-2_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 3,
+    "price"       : 43
+  },
+  {
+    "id"          : 9,
+    "title"       : "Unit 3",
+    "thumb"       : "01-3.jpg",
+    "thumb_small" : "01-3_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 12,
+    "price"       : 39
+  },
+  {
+    "id"          : 10,
+    "title"       : "Unit 4",
+    "thumb"       : "01-4.jpg",
+    "thumb_small" : "01-4_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 12,
+    "price"       : 72
+  },
+  {
+    "id"          : 11,
+    "title"       : "Unit 5",
+    "thumb"       : "01-5.jpg",
+    "thumb_small" : "01-5_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 12,
+    "price"       : 84
+  },
+  {
+    "id"          : 12,
+    "title"       : "Unit 6",
+    "thumb"       : "01-6.jpg",
+    "thumb_small" : "01-6_50.jpg",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore adipiscing elit. Ut enim.",
+    "timeleft"    : 2,
+    "watchers"    : 12,
+    "price"       : 99
+  }
+]
