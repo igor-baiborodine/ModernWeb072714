@@ -1,0 +1,96 @@
+= Unit 4. Walkthrough 2.
+© 2014 Farata Systems LLC. <training@faratasystems.com>
+
+:icons: font
+:last-update-label!:
+:sectanchors:
+:idprefix:
+:numbered!:
+:source-highlighter: coderay
+
+
+== Summary
+
+In this walkthrough you will refactor ProductService to use `Restangular` instead of `$http` service.
+
+== Steps
+
+. Use `walkthroughs/w2` directory from the provided handouts as the starting point for the walkthrough.
+
+. Open `bower.json` file. Add `"restangular": "^1.4.0"` dependency to the `dependencies` section.
+
+. Run `bower install` and `grunt wiredep` in the console to install newly added dependency to the app.
+
+. Open `app/app.js` file.
+[style="upperalpha"]
+.. Add `restangular` module dependency to the main application module:
++
+[source,js]
+----
+angular.module('auction', ['ngRoute', 'restangular'])
+----
+
+.. Add `config()` method that will configure `RestangularProvider`:
++
+[source,js]
+----
+.config(['RestangularProvider', function (RestangularProvider) {
+}
+----
+
+.. Inside the method set base URL for all HTTP requests made with Restangular:
++
+[source,js]
+----
+RestangularProvider.setBaseUrl('/data'); <1>
+----
+<1> Once we develop real backend we'll replace it with our backend-specific path.
+
+.. Inside the method set suffix for all HTTP requests made by Restangular:
++
+[source,js]
+----
+RestangularProvider.setRequestSuffix('.json'); <1>
+----
+<1> Since we don't have a real backend now and emulate it with static JSON file we need this suffix to make HTTP requests succeed. Once we develop a backend we'll remove this line.
+
+
+. Open `app/scripts/service/ProductService.js` file.
+[style="upperalpha"]
+.. Replace `$http` service dependency with `Restangular` one in the constructor function and static `$inject` property:
++
+[source,js]
+----
+var ProductService = function (Restangular) {
+    this.Restangular = Restangular;
+  };
+
+  ProductService.$inject = ['Restangular'];
+----
+
+.. Refactor `getProducts()` method implementation to use Restangular instead of `$http`:
++
+[source,js]
+----
+getProducts: function () {
+  return this.Restangular.all('products').getList();
+}
+----
+
+.. Refactor `find()` method implementation to use Restangular instead of `$http`. `find()` should accept `params` object and pass it to the `getList()` method:
++
+[source,js]
+----
+find: function (params) {
+  return this.Restangular.all('products').getList(params);
+}
+----
+
+.. Refactor `getProductById()` method implementation to use Restangular instead of `$http`:
++
+[source,js]
+----
+getProducts: function () {
+  return this.Restangular.one('products', productId).get();
+}
+----
