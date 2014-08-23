@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/w2-solution/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/w2-solution/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/w2-solution/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/w2/bower_components" />
+      <excludeFolder url="file://$MODULE_DIR$/w2/node_modules" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="restangular-DefinitelyTyped" level="application" />

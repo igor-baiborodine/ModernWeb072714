@@ -1,7 +1,12 @@
 (function () {
   'use strict';
 
-  angular.module('auction', ['ngRoute'])
+  angular.module('auction', ['ngRoute', 'restangular'])
+    .config(['RestangularProvider', function(RestangularProvider) {
+      RestangularProvider.setBaseUrl('data');
+      RestangularProvider.setRequestSuffix('.json');
+
+    }])
     .config(['$routeProvider', function ($routeProvider) {
       var title = function (page) {
         return page + ' | Auction';

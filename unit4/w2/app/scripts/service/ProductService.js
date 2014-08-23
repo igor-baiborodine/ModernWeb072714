@@ -1,39 +1,33 @@
 (function () {
   'use strict';
 
-  var ProductService = function ($http) {
+  var ProductService = function (Restangular) {
     // Instance attributes go here:
-    this.$http = $http;
+    this.Restangular = Restangular;
   };
 
   /** List all dependencies required by the service. */
-  ProductService.$inject = ['$http'];
+  ProductService.$inject = ['Restangular'];
 
   // Instance methods go here:
   ProductService.prototype = {
 
     /** Returns the list of all available products on the server. */
     getProducts: function () {
-      return this.$http.get('data/products-featured.json')
-          .then(function (resp) { return resp.data; });
+      return this.Restangular.all('products').getList();
     },
 
     /** Finds products with specified criteria.
       * NOTE: Search criteria are not implemented yet.
       */
-    find: function () {
-      return this.$http.get('data/products-search.json')
-          .then(function (resp) { return resp.data; });
+    find: function (params) {
+      return this.Restangular.all('products').getList(params);
     },
 
 
     /** Finds products by its ID. */
     getProductById: function (productId) {
-      return this.getProducts().then(function (products) {
-          return _.find(products, function (product) {
-              return product.id === productId;
-          });
-      });
+      return this.Restangular.one('products', productId).get();
     }
   };
 
