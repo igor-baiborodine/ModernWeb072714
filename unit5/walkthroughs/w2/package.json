@@ -1,0 +1,15 @@
+{
+    "name": "auction",
+    "description": "unit 4. w2",
+    "version": "0.1.0",
+    "dependencies": {},
+    "devDependencies": {
+        "karma": "~0.12",
+        "karma-jasmine": "~0.2.0",
+        "karma-chrome-launcher": "~0.1.2",
+        "karma-firefox-launcher": "^0.1.3",
+        "karma-safari-launcher": "^0.1.1",
+        "karma-opera-launcher": "^0.1.0",
+        "karma-phantomjs-launcher": "^0.1.2"
+    }
+}
