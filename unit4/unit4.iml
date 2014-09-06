@@ -3,6 +3,10 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/homework4/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/homework4/bower_components" />
+      <excludeFolder url="file://$MODULE_DIR$/homework4/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/homework4/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/w1/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/w1/bower_components" />
       <excludeFolder url="file://$MODULE_DIR$/w1/dist" />
