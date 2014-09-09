@@ -1,3 +1,5 @@
+package auction.model;
+
 /**
  * Created by yfain11 on 4/4/14.
  */
