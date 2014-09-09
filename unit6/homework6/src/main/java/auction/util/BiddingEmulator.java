@@ -29,7 +29,8 @@ public class BiddingEmulator {
 
     private class BiddingTask extends TimerTask {
 
-        LocalDateTime currentAuctionTime = LocalDateTime.now().plusSeconds(1);
+        LocalDateTime currentAuctionTime = LocalDateTime.now();
+        int count = 0;
 
         public void run() {
 
@@ -39,7 +40,8 @@ public class BiddingEmulator {
                     logger.info("Completed auction!");
                     System.exit(0);
                 }
-                logger.info("Bidding on product...");
+                count++;
+                logger.info("Bid[{}], bidding on product...", count);
                 // TODO: implement me
                 currentAuctionTime = currentAuctionTime.plusSeconds(1);
             }
@@ -50,6 +52,6 @@ public class BiddingEmulator {
 
         logger.info("Starting auction...");
 
-        new BiddingEmulator(new BiddingService(), LocalDateTime.now().plusSeconds(11));
+        new BiddingEmulator(new BiddingService(), LocalDateTime.now().plusSeconds(10));
     }
 }
