@@ -6,9 +6,11 @@ targetCompatibility = 1.8
 
 version = '1.0'
 
+mainClassName = 'auction.util.BiddingEmulator'
+
 repositories {
     maven {
-        url = "https://oss.sonatype.org/content/repositories/snapshots"
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
     }
     mavenCentral()
 }
