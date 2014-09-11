@@ -55,7 +55,7 @@ public class BiddingService {
                 newBid.setWinning(true);
                 sendWinningEmail(newBid);
             }
-            addBid(newBid.getProductId(), newBid);
+            addBid(newBid);
             addCurrentBidder(newBid.getProductId(), newBid.getUser());
         }
 
@@ -155,12 +155,12 @@ public class BiddingService {
         return createBid(getProduct(productId), bidAmount, quantity, getUser(userId));
     }
 
-    public void addBid(int productId, Bid bid) {
+    public void addBid(Bid bid) {
 
-        List<Bid> currentBids = getCurrentBids(productId);
+        List<Bid> currentBids = getCurrentBids(bid.getProductId());
 
         currentBids.add(bid);
-        productBids.put(productId, currentBids);
+        productBids.put(bid.getProductId(), currentBids);
     }
 
     private void addCurrentBidder(int productId, User bidder) {
