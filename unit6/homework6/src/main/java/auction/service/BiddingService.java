@@ -58,8 +58,8 @@ public class BiddingService {
                 newBid.setWinning(true);
                 sendWinningEmail(newBid);
             }
-            addBid(productId, newBid);
-            addCurrentBidder(productId, newBid.getUser());
+            addBid(newBid.getProductId(), newBid);
+            addCurrentBidder(newBid.getProductId(), newBid.getUser());
         }
 
         return newBid.isWinning();
