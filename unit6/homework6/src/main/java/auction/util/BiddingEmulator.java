@@ -36,28 +36,26 @@ public class BiddingEmulator {
 
         public void run() {
 
-            while (currentAuctionTime.isBefore(LocalDateTime.now())) {
-
-                if (currentAuctionTime.isAfter(endAuctionTime)) {
-                    logger.info("Completed auction without winner!");
-                    System.exit(0);
-                }
-                count++;
-
-                int userId = getRandomIntInRange(1, 3);
-                int productId = 1; //getRandomIntInRange(1, 2);
-                int quantity = getRandomIntInRange(1, 20);
-                BigDecimal bidAmount = new BigDecimal(String.valueOf(getRandomIntInRange(1, 300)));
-
-                logger.info("Placing bid[{}][productId={}, amount=${}, quantity={}, userId={}]",
-                        count, productId, bidAmount, quantity, userId);
-                if (!biddingService.bidOnProduct(productId, bidAmount, quantity, userId)) {
-                    logger.info("Completed auction with winner[{}] for product[{}] with highest bid[${}]!",
-                            userId, productId, bidAmount);
-                    System.exit(0);
-                }
-                currentAuctionTime = currentAuctionTime.plusSeconds(1);
+            if (currentAuctionTime.isAfter(endAuctionTime)) {
+                logger.info("Completed auction without winner!");
+                System.exit(0);
             }
+            count++;
+
+            int userId = getRandomIntInRange(1, 3);
+            int productId = 1; //getRandomIntInRange(1, 2);
+            int quantity = getRandomIntInRange(1, 20);
+            BigDecimal bidAmount = new BigDecimal(String.valueOf(getRandomIntInRange(1, 220)));
+
+            logger.info("Placing bid[{}][productId={}, amount=${}, quantity={}, userId={}]",
+                    count, productId, bidAmount, quantity, userId);
+            boolean winningBid = biddingService.bidOnProduct(productId, bidAmount, quantity, userId);
+            if (winningBid) {
+                logger.info("Completed auction with winner[{}] for product[{}] with highest bid[${}]!",
+                        userId, productId, bidAmount);
+                System.exit(0);
+            }
+            currentAuctionTime = currentAuctionTime.plusSeconds(1);
         }
 
     }

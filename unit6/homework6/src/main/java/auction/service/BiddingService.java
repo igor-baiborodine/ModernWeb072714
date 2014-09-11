@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 /**
  * @author Igor Baiborodine
- *
  */
 public class BiddingService {
 
@@ -43,50 +42,93 @@ public class BiddingService {
         Product product = getProduct(productId);
         User user = getUser(userId);
 
-        if (bidAmount.compareTo(product.getMinimalPrice()) == -1) {
-            sendSorryEmail(user, product, bidAmount);
-            return true;
-        }
-
         Bid newBid = createBid(product, bidAmount, quantity, user);
-        Bid bidWithHighestAmount = findBidWithHighestAmount(productId);
+        newBid.setWinning(false);
 
-        if (bidWithHighestAmount != null) {
-            if (bidWithHighestAmount.getAmount().compareTo(newBid.getAmount()) == -1) {
-                sendOverBidEmail(newBid);
+        if (bidAmountLessThanMinimalPrice(newBid)) {
+            sendSorryEmail(newBid);
+        } else {
+            Bid bidWithHighestAmount = findBidWithHighestAmount(productId);
+
+            if (bidAmountLessThanHighestBidAmount(newBid, bidWithHighestAmount)) {
+                Set<User> otherBidders = findOtherBidders(newBid);
+                sendOverBidEmail(newBid, otherBidders);
             }
-            if (product.getReservedPrice().compareTo(newBid.getAmount()) == -1
-                    || product.getReservedPrice().compareTo(newBid.getAmount()) == 0) {
+            if (bidAmountEqualToOrGreaterThanReservedPrice(newBid)) {
+                newBid.setWinning(true);
                 sendWinningEmail(newBid);
-                return false;
             }
+            addBid(productId, newBid);
+            addCurrentBidder(productId, newBid.getUser());
         }
-        addBid(productId, newBid);
-        addCurrentBidder(productId, newBid);
-        return true;
+
+        return newBid.isWinning();
     }
 
-    private void sendSorryEmail(final User bidder, final Product product, final BigDecimal bidAmount) {
+    private boolean bidAmountLessThanHighestBidAmount(final Bid newBid, final Bid bidWithHighestAmount) {
 
-        logger.info("Sending SORRY email to [{}]: new bid[${}] is less than minimal price[{}] for  product[{}]",
-                bidder.getName(), bidAmount, product.getMinimalPrice(), product.getTitle());
+        return (bidWithHighestAmount != null) && bidWithHighestAmount.getAmount().compareTo(newBid.getAmount()) == -1;
     }
 
-    public void sendOverBidEmail(final Bid newBid) {
+    private boolean bidAmountLessThanMinimalPrice(final Bid newBid) {
+
+        return newBid.getAmount().compareTo(newBid.getProduct().getMinimalPrice()) == -1;
+    }
+
+    private boolean bidAmountEqualToOrGreaterThanReservedPrice(final Bid newBid) {
+
+        Product product = newBid.getProduct();
+        return product.getReservedPrice().compareTo(newBid.getAmount()) == -1
+                || product.getReservedPrice().compareTo(newBid.getAmount()) == 0;
+    }
+
+    private void sendSorryEmail(final Bid newBid) {
+
+        Product product = newBid.getProduct();
+        logger.info("Sending SORRY email to [{}]: new bid[${}] is less than minimal price[${}] for  product[{}]",
+                newBid.getUser().toShortString(), newBid.getAmount(), product.getMinimalPrice(), product.getTitle());
+    }
+
+    private void sendOverBidEmail(final Bid newBid, final Set<User> otherBidders) {
+
+        otherBidders.forEach(bidder -> logger.info("Sending OVERBID email to [{}]: new bid[${}] was received for product[{}]",
+                bidder.toShortString(), newBid.getAmount(), newBid.getProduct().getTitle()));
+    }
+
+    private void sendWinningEmail(final Bid newBid) {
+
+        Product product = newBid.getProduct();
+        logger.info("Sending WINNING email to [{}]: new bid[${}] is equal to or greater than" +
+                        " reserved price[${}] for  product[{}]", newBid.getUser().toShortString(),
+                newBid.getAmount(), product.getReservedPrice(), product.getTitle());
+    }
+
+    private Set<User> findOtherBidders(final Bid newBid) {
 
         Set<User> bidders = getCurrentBidders(newBid.getProductId());
-        bidders.stream()
-                .filter(bidder -> !bidder.equals(newBid.getUser()) && bidder.isGetOverbidNotifications()).forEach(bidder ->
-                logger.info("Sending OVERBID email to [{}]: new bid[${}] was received for product[{}]",
-                        bidder.getName(), newBid.getAmount(), newBid.getProduct().getTitle()));
+        return bidders.stream()
+                .filter(bidder -> !bidder.equals(newBid.getUser()) && bidder.isGetOverbidNotifications())
+                .collect(Collectors.toSet());
     }
 
-    private void sendWinningEmail(final Bid bid) {
+    public Bid findBidWithHighestAmount(int productId) {
 
-        Product product = bid.getProduct();
-        logger.info("Sending WINNING email to [{}]: new bid[${}] is equals to or greater than" +
-                " reserved price[{}] for  product[{}]", bid.getUser().getName(), bid.getAmount(),
-                product.getReservedPrice(), product.getTitle());
+        List<Bid> currentBids = getCurrentBids(productId);
+        if (currentBids.isEmpty()) {
+            return null;
+        }
+
+//        Java 7
+//        Comparator<Bid> byBidAmount = new Comparator<Bid>() {
+//            @Override
+//            public int compare(final Bid o1, final Bid o2) {
+//                return o1.getAmount().compareTo(o2.getAmount());
+//            }
+//        };
+
+        Comparator<Bid> byBidAmount = (o1, o2) -> o2.getAmount().compareTo(o1.getAmount());
+        List<Bid> sortedCurrentBids = currentBids.stream().sorted(byBidAmount).collect(Collectors.toList());
+        return sortedCurrentBids.get(0);
     }
 
     public Product getProduct(int productId) {
@@ -109,31 +151,9 @@ public class BiddingService {
         return productBidders.get(productId) == null ? Sets.newHashSet() : productBidders.get(productId);
     }
 
-    public BigDecimal getLastBidAmount(int productId) {
+    public Bid createBid(int productId, BigDecimal bidAmount, int quantity, int userId) {
 
-        List<Bid> currentBids = getCurrentBids(productId);
-        if (currentBids.isEmpty()) {
-            return new BigDecimal("0.0");
-        }
-        return currentBids.get(currentBids.size() - 1).getAmount();
-    }
-
-    public Bid findBidWithHighestAmount(int productId) {
-
-        List<Bid> currentBids = getCurrentBids(productId);
-        if (currentBids.isEmpty()) {
-            return null;
-        }
-//        Comparator<Bid> byBidAmount = new Comparator<Bid>() {
-//            @Override
-//            public int compare(final Bid o1, final Bid o2) {
-//                return o1.getAmount().compareTo(o2.getAmount());
-//            }
-//        };
-
-        Comparator<Bid> byBidAmount = (o1, o2) -> o2.getAmount().compareTo(o1.getAmount());
-        List<Bid> sortedCurrentBids = currentBids.stream().sorted(byBidAmount).collect(Collectors.toList());
-        return sortedCurrentBids.get(0);
+        return createBid(getProduct(productId), bidAmount, quantity, getUser(userId));
     }
 
     public void addBid(int productId, Bid bid) {
@@ -144,10 +164,10 @@ public class BiddingService {
         productBids.put(productId, currentBids);
     }
 
-    private void addCurrentBidder(int productId, Bid newBid) {
+    private void addCurrentBidder(int productId, User bidder) {
 
         Set<User> currentBidders = getCurrentBidders(productId);
-        currentBidders.add(newBid.getUser());
+        currentBidders.add(bidder);
         productBidders.put(productId, currentBidders);
     }
 
@@ -200,16 +220,10 @@ public class BiddingService {
         return users;
     }
 
-    public Bid createBid(int productId, BigDecimal bidAmount, int quantity, int userId) {
-
-        return createBid(getProduct(productId), bidAmount, quantity, getUser(userId));
-    }
-
     private Bid createBid(Product product, BigDecimal bidAmount, int quantity, User user) {
 
         Bid bid = new Bid(product, bidAmount, quantity, user);
         bid.setId(getAllBidsCount() + 1);
-        bid.setBidTime(LocalDateTime.now());
 
         return bid;
     }

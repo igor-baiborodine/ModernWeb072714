@@ -3,15 +3,19 @@ package auction.model;
 import com.google.common.base.MoreObjects;
 
 /**
- * Created by yfain11 on 4/4/14.
+ * @author Yakov Fain
+ * @author Igor Baiborodine
  */
 public class User {
-    public int id;
-    public String name;
-    public String email;
-    public boolean getOverbidNotifications;
 
-    public User(final int id, final String name, final String email, final boolean getOverbidNotifications) {
+    private int id;
+    private String name;
+    private String email;
+    private boolean getOverbidNotifications;
+
+    public User() {}
+
+    public User(int id, String name, String email, boolean getOverbidNotifications) {
 
         this.id = id;
         this.name = name;
@@ -53,6 +57,7 @@ public class User {
 
     @Override
     public boolean equals(final Object o) {
+
         if (this == o) return true;
         if (!(o instanceof User)) return false;
 
@@ -69,6 +74,7 @@ public class User {
 
     @Override
     public String toString() {
+
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)
@@ -76,4 +82,13 @@ public class User {
                 .add("getOverbidNotifications", getOverbidNotifications)
                 .toString();
     }
+
+    public String toShortString() {
+
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .toString();
+    }
+
 }

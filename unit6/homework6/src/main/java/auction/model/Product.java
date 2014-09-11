@@ -6,19 +6,22 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Created by yfain11 on 4/4/14.
+ * @author Yakov Fain
+ * @author Igor Baiborodine
  */
 public class Product {
 
-    public int id;
-    public String title;
-    public String thumb;
-    public String description;
-    public int quantity;   // How many items the seller has
-    public LocalDateTime auctionEndTime;
-    public int watchers;
-    public BigDecimal minimalPrice;     // Don't sell unless the bid is more than min price
-    public BigDecimal reservedPrice;   // If a bidder offers reserved price, the auction is closed
+    private int id;
+    private String title;
+    private String thumb;
+    private String description;
+    private int quantity;   // How many items the seller has
+    private LocalDateTime auctionEndTime;
+    private int watchers;
+    private BigDecimal minimalPrice;     // Don't sell unless the bid is more than min price
+    private BigDecimal reservedPrice;   // If a bidder offers reserved price, the auction is closed
+
+    public Product() {}
 
     public int getId() {
         return id;
@@ -99,9 +102,8 @@ public class Product {
 
         final Product product = (Product) o;
 
-        if (id != product.id) return false;
+        return id == product.id;
 
-        return true;
     }
 
     @Override

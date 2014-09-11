@@ -6,17 +6,20 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Created by yfain11 on 4/4/14.
+ * @author Yakov Fain
+ * @author Igor Baiborodine
  */
 public class Bid {
 
-    public int id;
-    public Product product;
-    public BigDecimal amount;
-    public int desiredQuantity; // How many items the user wants
-    public User user;
-    public LocalDateTime bidTime;
-    public boolean isWinning;
+    private int id;
+    private Product product;
+    private BigDecimal amount;
+    private int desiredQuantity; // How many items the user wants
+    private User user;
+    private LocalDateTime bidTime;
+    private boolean isWinning;
+
+    public Bid() {}
 
     public Bid(final Product product, final BigDecimal amount, final int desiredQuantity, final User user) {
 
@@ -24,6 +27,8 @@ public class Bid {
         this.amount = amount;
         this.desiredQuantity = desiredQuantity;
         this.user = user;
+        this.bidTime = LocalDateTime.now();
+        this.isWinning = false;
     }
 
     public int getId() {
