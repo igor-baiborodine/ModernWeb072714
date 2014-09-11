@@ -39,10 +39,7 @@ public class BiddingService {
 
     public boolean bidOnProduct(int productId, BigDecimal bidAmount, int quantity, int userId) {
 
-        Product product = getProduct(productId);
-        User user = getUser(userId);
-
-        Bid newBid = createBid(product, bidAmount, quantity, user);
+        Bid newBid = createBid(getProduct(productId), bidAmount, quantity, getUser(userId));
         newBid.setWinning(false);
 
         if (bidAmountLessThanMinimalPrice(newBid)) {
@@ -50,7 +47,7 @@ public class BiddingService {
         } else {
             Bid bidWithHighestAmount = findBidWithHighestAmount(productId);
 
-            if (bidAmountLessThanHighestBidAmount(newBid, bidWithHighestAmount)) {
+            if (bidAmountMoreThanHighestBidAmount(newBid, bidWithHighestAmount)) {
                 Set<User> otherBidders = findOtherBidders(newBid);
                 sendOverBidEmail(newBid, otherBidders);
             }
@@ -65,14 +62,14 @@ public class BiddingService {
         return newBid.isWinning();
     }
 
-    private boolean bidAmountLessThanHighestBidAmount(final Bid newBid, final Bid bidWithHighestAmount) {
-
-        return (bidWithHighestAmount != null) && bidWithHighestAmount.getAmount().compareTo(newBid.getAmount()) == -1;
-    }
-
     private boolean bidAmountLessThanMinimalPrice(final Bid newBid) {
 
         return newBid.getAmount().compareTo(newBid.getProduct().getMinimalPrice()) == -1;
+    }
+
+    private boolean bidAmountMoreThanHighestBidAmount(final Bid newBid, final Bid bidWithHighestAmount) {
+
+        return (bidWithHighestAmount != null) && newBid.getAmount().compareTo(bidWithHighestAmount.getAmount()) == 1;
     }
 
     private boolean bidAmountEqualToOrGreaterThanReservedPrice(final Bid newBid) {
@@ -126,9 +123,11 @@ public class BiddingService {
 //            }
 //        };
 
-        Comparator<Bid> byBidAmount = (o1, o2) -> o2.getAmount().compareTo(o1.getAmount());
-        List<Bid> sortedCurrentBids = currentBids.stream().sorted(byBidAmount).collect(Collectors.toList());
-        return sortedCurrentBids.get(0);
+//        Comparator<Bid> byBidAmountDesc = (o1, o2) -> o2.getAmount().compareTo(o1.getAmount());
+//        List<Bid> sortedCurrentBids = currentBids.stream().sorted(byBidAmountDesc).collect(Collectors.toList());
+//        return sortedCurrentBids.get(0);
+        Comparator<Bid> byBidAmountAsc = (o1, o2) -> o1.getAmount().compareTo(o2.getAmount());
+        return currentBids.stream().max(byBidAmountAsc).get();
     }
 
     public Product getProduct(int productId) {
