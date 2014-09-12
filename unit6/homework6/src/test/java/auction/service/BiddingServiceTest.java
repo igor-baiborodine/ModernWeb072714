@@ -36,13 +36,13 @@ public class BiddingServiceTest {
         BigDecimal highestBidAmount = new BigDecimal("30.0");
 
         Bid bid = biddingService.createBid(productId, new BigDecimal("10.0"), 1, userId);
-        biddingService.addBid(productId, bid);
+        biddingService.addBidToQueue(bid);
 
         Bid bid2 = biddingService.createBid(productId, highestBidAmount, 1, userId);
-        biddingService.addBid(productId, bid2);
+        biddingService.addBidToQueue(bid2);
 
         Bid bid3 = biddingService.createBid(productId, new BigDecimal("20.0"), 1, userId);
-        biddingService.addBid(productId, bid3);
+        biddingService.addBidToQueue(bid3);
 
         Bid bidWithHighestAmount = biddingService.findBidWithHighestAmount(productId);
         assertTrue(bidWithHighestAmount.getAmount().compareTo(highestBidAmount) == 0);

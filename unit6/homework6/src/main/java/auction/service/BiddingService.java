@@ -51,12 +51,12 @@ public class BiddingService {
                 Set<User> otherBidders = findOtherBidders(newBid);
                 sendOverBidEmail(newBid, otherBidders);
             }
+
             if (bidAmountEqualToOrGreaterThanReservedPrice(newBid)) {
                 newBid.setWinning(true);
                 sendWinningEmail(newBid);
             }
-            addBid(newBid);
-            addCurrentBidder(newBid.getProductId(), newBid.getUser());
+            addBidToQueue(newBid);
         }
 
         return newBid.isWinning();
@@ -155,19 +155,15 @@ public class BiddingService {
         return createBid(getProduct(productId), bidAmount, quantity, getUser(userId));
     }
 
-    public void addBid(Bid bid) {
+    public void addBidToQueue(Bid bid) {
 
         List<Bid> currentBids = getCurrentBids(bid.getProductId());
-
         currentBids.add(bid);
         productBids.put(bid.getProductId(), currentBids);
-    }
 
-    private void addCurrentBidder(int productId, User bidder) {
-
-        Set<User> currentBidders = getCurrentBidders(productId);
-        currentBidders.add(bidder);
-        productBidders.put(productId, currentBidders);
+        Set<User> currentBidders = getCurrentBidders(bid.getProductId());
+        currentBidders.add(bid.getUser());
+        productBidders.put(bid.getProductId(), currentBidders);
     }
 
     private Map<Integer, Product> createProducts() {
