@@ -1,0 +1,46 @@
+apply plugin: 'idea'        // http://www.gradle.org/docs/current/userguide/idea_plugin.html
+apply plugin: 'java'        // http://www.gradle.org/docs/current/userguide/java_plugin.html
+apply plugin: 'groovy'
+
+// http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+repositories {
+    jcenter()
+
+    maven {
+        url = "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+dependencies {
+
+    compile 'org.springframework:spring-beans:4.1.0.RELEASE'
+    compile 'org.springframework:spring-context:4.1.0.RELEASE'
+    compile 'org.springframework:spring-context-support:4.1.0.RELEASE'
+
+    // Spring has support or JSR-330 annotations
+    // http://docs.spring.io/spring/docs/4.1.0.RELEASE/spring-framework-reference/html/beans.html#beans-annotation-config
+    compile 'javax.inject:javax.inject:1'
+    testCompile 'org.codehaus.groovy:groovy-all:2.3.6'
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.3-SNAPSHOT"
+    testCompile "org.spockframework:spock-spring:1.0-groovy-2.3-SNAPSHOT"
+    testCompile 'org.springframework:spring-test:4.1.0.RELEASE'
+    testRuntime "cglib:cglib-nodep:2.2"
+
+    testCompile "junit:junit:4.11"
+
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+// http://www.gradle.org/docs/current/userguide/idea_plugin.html
+// http://www.gradle.org/docs/current/dsl/org.gradle.plugins.ide.idea.model.IdeaProject.html
+// http://www.gradle.org/docs/current/dsl/org.gradle.plugins.ide.idea.model.IdeaModule.html
+idea.project {
+    jdkName = '1.8'
+    languageLevel = '1.8'
+}
+
+// http://www.gradle.org/docs/current/userguide/gradle_wrapper.html
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
