@@ -1,4 +1,4 @@
-package com.farata.course.mwd.auction.service;
+package com.farata.course.mwd.auction.resource;
 
 
 import org.jboss.arquillian.junit.Arquillian;

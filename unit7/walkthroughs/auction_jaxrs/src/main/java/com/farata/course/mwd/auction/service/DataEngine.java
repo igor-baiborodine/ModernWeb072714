@@ -1,4 +1,4 @@
-package com.farata.course.mwd.auction.data;
+package com.farata.course.mwd.auction.service;
 
 import com.farata.course.mwd.auction.entity.Product;
 

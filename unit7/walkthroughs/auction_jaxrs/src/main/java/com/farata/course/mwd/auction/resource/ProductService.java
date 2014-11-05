@@ -1,6 +1,6 @@
-package com.farata.course.mwd.auction.service;
+package com.farata.course.mwd.auction.resource;
 
-import com.farata.course.mwd.auction.data.DataEngine;
+import com.farata.course.mwd.auction.service.DataEngine;
 import com.farata.course.mwd.auction.entity.Product;
 
 import javax.inject.Inject;

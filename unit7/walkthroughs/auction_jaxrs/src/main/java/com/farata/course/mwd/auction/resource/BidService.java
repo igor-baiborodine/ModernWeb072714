@@ -1,17 +1,13 @@
-package com.farata.course.mwd.auction.service;
+package com.farata.course.mwd.auction.resource;
 
 import com.farata.course.mwd.auction.entity.Bid;
 
 import javax.annotation.Resource;
 import javax.jms.*;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import java.math.BigDecimal;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 @Path("bid")
